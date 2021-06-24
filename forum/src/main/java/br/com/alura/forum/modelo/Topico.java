@@ -21,32 +21,21 @@ import br.com.alura.forum.controller.dto.TopicoDto;
 @Table(name = "tb_topico")
 public class Topico {
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String titulo;
 	private String mensagem;
 	private LocalDateTime dataCriacao = LocalDateTime.now();
 	@Enumerated(EnumType.STRING)
 	private StatusTopico status = StatusTopico.NAO_RESPONDIDO;
-	
+
 	@ManyToOne
 	private Usuario autor;
 	@ManyToOne
 	private Curso curso;
 	@OneToMany(mappedBy = "topico")
 	private List<Resposta> respostas = new ArrayList<>();
-
-	public Topico(String titulo, String mensagem, Curso curso) {
-		this.titulo = titulo;
-		this.mensagem = mensagem;
-		this.curso = curso;
-	}
-	
-	//conversor de entidade para entidadeDto
-	public static List<TopicoDto> converter(List<Topico> topicos) {
-		return topicos.stream().map(TopicoDto::new).collect(Collectors.toList());
-		//return topicos.stream().map(x -> new TopicoDto(x)).collect(Collectors.toList());
-	}
 
 	public Long getId() {
 		return id;
@@ -111,7 +100,14 @@ public class Topico {
 	public void setRespostas(List<Resposta> respostas) {
 		this.respostas = respostas;
 	}
-	
+
+	// conversor de entidade para entidadeDto
+	public static List<TopicoDto> converter(List<Topico> topicos) {
+		return topicos.stream().map(TopicoDto::new).collect(Collectors.toList());
+		// return topicos.stream().map(x -> new
+		// TopicoDto(x)).collect(Collectors.toList());
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

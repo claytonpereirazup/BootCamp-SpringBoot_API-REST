@@ -24,7 +24,6 @@ public class Resposta {
 	@ManyToOne
 	private Topico topico;
 	
-
 	public Long getId() {
 		return id;
 	}
