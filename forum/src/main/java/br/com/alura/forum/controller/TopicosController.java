@@ -13,9 +13,9 @@ import br.com.alura.forum.modelo.Topico;
 @RestController
 public class TopicosController {
 	
-	//@ResponseBody - @RestController substitui a necesside da aplicar o @ResponseBody em todo os metodos
 	@RequestMapping("/topicos")
 	public List<TopicoDto> lista() {
+		// lista em memória
 		Topico topico = new Topico("Dúvida", "Dúvida com Spring", new Curso("Spring", "Programação"));
 		return Topico.converter(Arrays.asList(topico, topico, topico));
 	}
