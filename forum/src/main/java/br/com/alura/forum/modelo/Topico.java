@@ -36,6 +36,15 @@ public class Topico {
 	private Curso curso;
 	@OneToMany(mappedBy = "topico")
 	private List<Resposta> respostas = new ArrayList<>();
+	
+	public Topico() {
+	}
+	
+	public Topico(String titulo, String mensagem, Curso curso) {
+		this.titulo = titulo;
+		this.mensagem = mensagem;
+		this.curso = curso;
+	}
 
 	public Long getId() {
 		return id;
@@ -101,12 +110,13 @@ public class Topico {
 		this.respostas = respostas;
 	}
 
-	// conversor de entidade para entidadeDto
+	// conversor de entidade para Dto
 	public static List<TopicoDto> converter(List<Topico> topicos) {
 		return topicos.stream().map(TopicoDto::new).collect(Collectors.toList());
 		// return topicos.stream().map(x -> new
 		// TopicoDto(x)).collect(Collectors.toList());
 	}
+	
 
 	@Override
 	public int hashCode() {
@@ -132,5 +142,7 @@ public class Topico {
 			return false;
 		return true;
 	}
+
+	
 
 }
