@@ -3,6 +3,9 @@ package br.com.alura.forum.modelo;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import br.com.alura.forum.controller.dto.TopicoDto;
 
 public class Topico {
 
@@ -19,6 +22,11 @@ public class Topico {
 		this.titulo = titulo;
 		this.mensagem = mensagem;
 		this.curso = curso;
+	}
+	
+	//conversor de entidade para entidadeDto
+	public static List<TopicoDto> converter(List<Topico> topicos) {
+		return topicos.stream().map(x -> new TopicoDto(x)).collect(Collectors.toList());
 	}
 
 	public Long getId() {
