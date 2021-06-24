@@ -17,12 +17,18 @@ public class TopicosController {
 	private TopicoRepository topicoRepository;
 	
 	@RequestMapping("/topicos")
-	public List<TopicoDto> listar() {
+	public List<TopicoDto> listar(String nomeCurso) {
 		//// lista em memória
 		//Topico topico = new Topico("Dúvida", "Dúvida com Spring", new Curso("Spring", "Programação"));
 		//return Topico.converter(Arrays.asList(topico, topico, topico));
-		List<Topico> topicos = topicoRepository.findAll();
 		
-		return Topico.converter(topicos);
+		//topicos?nomeCurso=HTML%205
+		if (nomeCurso == null) {
+			List<Topico> topicos = topicoRepository.findAll();
+			return Topico.converter(topicos);
+		} else {
+			List<Topico> topicos = topicoRepository.carregarPorNomeDoCurso(nomeCurso);
+			return Topico.converter(topicos);
+		}
 	}
 }
